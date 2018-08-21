@@ -1,5 +1,4 @@
 ---
-layout: person
 name: Gaurav Koley
 github: arkokoley
 description: >
