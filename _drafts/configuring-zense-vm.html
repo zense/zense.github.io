@@ -1,0 +1,38 @@
+---
+layout: post
+title: Configuring Zense VM
+date: 
+type: post
+parent_id: '0'
+published: false
+password: ''
+status: draft
+categories: []
+tags: []
+meta:
+  _edit_last: '1'
+  rcp_user_level: None
+  _um_custom_access_settings: '0'
+  _um_accessible: '0'
+  _um_access_redirect2: ''
+  _um_access_roles: a:1:{i:0;s:1:"0";}
+  _um_access_redirect: ''
+author:
+  login: vik-y
+  email: vikasyadavgood@gmail.com
+  display_name: Vikas Yadav
+  first_name: Vikas
+  last_name: Yadav
+---
+<p>This article is for the book keeping of information used to configure the Zense VM.</p>
+<p>Important packages installed</p>
+<ul>
+<li>etckeeper -&gt; To keep track of configuration changes</li>
+<li>docker</li>
+<li>docker-compose</li>
+<li>nginx passenger -&gt; To run rails apps directly without containers if needed</li>
+</ul>
+<p>Deployment architecture</p>
+<p>The deployment model had to support two use cases : 1, when containerised version of an app is available, 2 , when containerised version of app is not available.</p>
+<p>Internet -&gt; nginx-passenger running on host machine -&gt; nginx-containerised (Will be used to reverse proxy to containers)</p>
+<p>&nbsp;</p>

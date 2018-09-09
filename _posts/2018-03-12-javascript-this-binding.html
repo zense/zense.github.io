@@ -1,0 +1,124 @@
+---
+layout: post
+title: Javascript - this binding
+date: 2018-03-12 13:09:24.000000000 +05:30
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- weekly meeting
+tags: []
+meta:
+  _edit_last: '15'
+  rcp_user_level: None
+  _um_custom_access_settings: '0'
+  _um_accessible: '0'
+  _um_access_redirect2: ''
+  _um_access_roles: a:1:{i:0;s:1:"0";}
+  _um_access_redirect: ''
+author:
+  login: satviksr
+  email: satviksr@gmail.com
+  display_name: Satvik Ramaprasad
+  first_name: Satvik
+  last_name: Ramaprasad
+---
+<p><strong><code>this</code> Keyword explained</strong></p>
+<p>The <code>this</code> keyword is one of the confusing mechanism in JavaScript. Its confusing as <code>this</code> in JS isn't the same as <code>this</code> in conventional OOP languages. In JS, <code>this</code> could have different meanings depending on the call-site. There are 4 rules for <code>this</code> binding and by inspecting the call-site we can identify the binding.</p>
+<p>Let us explore the 4 rules, but before we get started we need some helper functions to understand.</p>
+<pre><code>function print_this_a() {
+    console.log(this.a);
+}
+function call_fn(fn) {
+    // take a fn as parameter and execute it!
+    fn();
+}
+a = "Global a";
+</code></pre>
+<p><strong>Rule 1 - Default Binding</strong></p>
+<p>The first rule we will examine comes from standalone function invocation. Think of this rule as the default catch-all rule when none of the other rules applies. This resolves to the global object, in the browser its the window object.</p>
+<pre><code>console.log("(1.0) Default Binding");
+print_this_a(); // Output - "Global a"
+</code></pre>
+<p><strong>Rule 2 - Implicit Binding</strong></p>
+<p>This rule is applicable when the call-site has a context object or owning object, ie the object owns the <strong>function reference</strong> at the time the function is called.</p>
+<pre><code>obj1 = {
+    a: "obj1 a",
+    print_this_obj1_a: print_this_a
+}
+
+console.log("(2.0) Implicit Binding");
+obj1.print_this_obj1_a(); // Output - "obj1 a"
+</code></pre>
+<p>Since the object <code>obj1</code> owns a reference to <code>print_this_obj1_a</code> and that particular function is invoked through the object reference, <code>this</code> is resolved to <code>obj1</code></p>
+<p>**Implicitly losing context **</p>
+<pre><code>console.log("(2.1) Implicitly lost");
+call_fn(obj1.print_this_obj1_a); 
+// this is no longer obj1 as the function no longer owns the reference
+</code></pre>
+<p><strong>A way to fix this - explicit binding</strong></p>
+<pre><code>console.log("(2.2) Calling with call"); 
+print_this_a.call(obj1, "var1", "var2"); 
+// This is a way to specify the object you want 'this' to resolve to
+
+console.log("(2.3) Calling with apply");
+print_this_a.apply(obj1, ["var1", "var2"]);
+// Alternative way
+</code></pre>
+<p><strong>Rule 3 - Hard Binding</strong></p>
+<pre><code>// Helper fn which allows us to bind functions to specific objects, permanently 
+function bind(fn, obj) {
+    return function() {
+        return fn.apply(obj, arguments);
+    };
+}
+</code></pre>
+<p>The above function uses the "apply" property discussed in the previous rule. However, this can now be passed across functions and be invoked with the binding intact.</p>
+<pre><code>console.log("(3.0) Hardbinding using Binding Helper");
+var hard_binded_fn = bind(print_this_a, obj1);
+call_fn(hard_binded_fn); // Output - "obj1 a"
+</code></pre>
+<p>ES6 has a built-in bind function, which we can use as follows</p>
+<pre><code>console.log("(3.1) Hardbinding using ES6 bind");
+var hard_binded_fn_ES6 = print_this_a.bind(obj1);
+call_fn(hard_binded_fn_ES6);
+</code></pre>
+<p><strong>Rule 4 - New Binding</strong></p>
+<p>JavaScript has a new operator, and the code pattern to use it looks basically identical to what we see in those class-oriented languages. In JS, constructors are just functions that happen to be called with the new operator in front of them. We will discuss more about this in prototypes</p>
+<pre><code>function object_constructor(name) {
+    this.a = name;
+    this.print_this_object_a = print_this_a;
+}
+
+object_constructor.prototype.change_a = function(a) {
+    this.a = a;
+}
+
+obj2 = new object_constructor("obj2_a");
+obj3 = new object_constructor("obj3_a");
+console.log("(4.0) Calling with new binding");
+obj2.print_this_object_a(); //obj2_a"
+obj3.print_this_object_a(); //obj3_a"
+obj2.change_a("obj2_a_new")
+obj3.change_a("obj3_a_new")
+obj2.print_this_object_a(); //obj2_a_new"
+obj3.print_this_object_a(); //obj3_a_new"
+</code></pre>
+<p><strong>Ignored this</strong></p>
+<p>This is unrelated to the above rules, however its a handy feature in JS. It can be useful to create multiple functions which have small differences with each other.</p>
+<pre><code>console.log("&lt; --- IGNORED this --- &gt;");
+// This can be useful to create functions with pre populated arguments
+function print_arguments(){
+    console.log( Array.prototype.slice.call(arguments, 0) );
+}
+console.log("print_arguments in action");
+print_arguments(1,2,3); // 1 2 3
+
+console.log("Calling with pre populated arguements");
+var fn1 = print_arguments.bind(null,1,2,3);
+fn1(); // 1 2 3
+fn1(4,5,6); // 1 2 3 4 5 6
+</code></pre>
+<p>Further Reading - “You Don’t Know JS: this &amp; Object Prototypes.”</p>

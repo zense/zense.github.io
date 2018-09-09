@@ -1,0 +1,76 @@
+---
+layout: post
+title: Rails session.
+date: 2018-04-22 13:03:24.000000000 +05:30
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories: []
+tags: []
+meta:
+  _edit_last: '18'
+  rcp_user_level: None
+  _um_custom_access_settings: '0'
+  _um_accessible: '0'
+  _um_access_redirect2: ''
+  _um_access_roles: a:1:{i:0;s:1:"0";}
+  _um_access_redirect: ''
+author:
+  login: nithinr07
+  email: nithin.raj@iiitb.org
+  display_name: Nithin Raj
+  first_name: Nithin
+  last_name: Raj
+---
+<p><strong>Why Rails ??</strong></p>
+<ol>
+<li>First of all it is very fast to code a project in rails. So have a this knowledge with us will be a very big advantage during coding competitions and hackathons. </li>
+<li>It follows Convention over configuration which helps the programmer a lot during decision making.</li>
+<li>There are plenty of gems(libraries) available which makes the development lot easier. And as the community is huge these libraries are always kept uptodate </li>
+<li>As the rails user-base is increasing exponentially, the chances of this getting outdated is very slim.</li>
+</ol>
+<p><strong>Controllers</strong></p>
+<ol>
+<li>Controller is the place where the logic of the program is written.</li>
+<li>It receives all the requests from the application.</li>
+<li>The received requests are processed here, and appropriate response is created</li>
+<li>It is also used for just updating the database with new data.</li>
+</ol>
+<p>it will be more clear as you go through one example.</p>
+<p><strong>Models</strong></p>
+<ol>
+<li>Models are nothing but your data bases.</li>
+<li>These are ruby classes where information are stored or retrieved.</li>
+</ol>
+<p><strong>Views</strong></p>
+<ol>
+<li>Views contain the dynamic web pages that the users will be seeing. While Models and controllers are kept behind the curtains.</li>
+<li>These pages connect the users with the server in the backend </li>
+<li>They are written in a special format called Embedded Ruby(.erb)</li>
+</ol>
+<p><a href="http://guides.rubyonrails.org/getting_started.html">The official documentation explains the work flow in the best possible way with examples</a></p>
+<p>And Do learn about rails-scaffolding which generates the entire work that was done in the above tutorial in just one terminal command :)</p>
+<p><a href="http://guides.rubyonrails.org/">Going through all these will give deeper insights.</a></p>
+<p>Other Thoughts:</p>
+<ul>
+<li>
+<p>It is better to keep 3 terminals open</p>
+<ol>
+<li>for rails c (rails console, this can be used during testing for manipulating data in server side without touching the website)</li>
+<li>rails s (for rails server)</li>
+<li>rails routes</li>
+</ol>
+</li>
+<li>
+<p>Migration helps us in maintaining a version control for our database. So having clean migration files will help a lot, as it is very easy to roll back to previous versions.</p>
+</li>
+<li>
+<p>Difference between render and redirect:</p>
+<p>Render function will generate the view to the browser, when render function is not called in the controller it generates the default view of the controller.</p>
+<p>Redirect tells the browser to make a entire new request to a page.</p>
+<p>It is not required to make new requests every time. So think before you use redirect function.</p>
+</li>
+</ul>
+<p>Special thanks to Biswesh for the session. Hope this helped.</p>

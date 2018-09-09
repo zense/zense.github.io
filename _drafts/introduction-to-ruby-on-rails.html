@@ -1,0 +1,89 @@
+---
+layout: post
+title: Introduction to Ruby on Rails
+date: 
+type: post
+parent_id: '0'
+published: false
+password: ''
+status: private
+categories: []
+tags:
+- Ruby on Rails
+meta:
+  _edit_last: '2'
+  rcp_user_level: None
+  _um_custom_access_settings: '0'
+  _um_accessible: '0'
+  _um_access_redirect2: ''
+  _um_access_roles: a:1:{i:0;s:1:"0";}
+  _um_access_redirect: ''
+author:
+  login: arkokoley
+  email: arkokoley@gmail.com
+  display_name: Gaurav Koley
+  first_name: Gaurav
+  last_name: Koley
+---
+<p>I took a session on Getting started with Ruby on Rails. This was an invite-only session.</p>
+<p>The objective was to get members and other attendees some basic knowledge about MVC architechture and how Ruby on Rails Apps are designed.</p>
+<p>The following material was covered in the session.</p>
+<div id="published_content" class="markdown">
+<h1>Install Ruby on Rails:</h1>
+<ol>
+<li>For Ubuntu: <a href="https://gorails.com/setup/ubuntu/16.04#ruby-rvm">https://gorails.com/setup/ubuntu/16.04#ruby-rvm</a></li>
+<li>For Mac: <a href="http://railsapps.github.io/installrubyonrails-mac.html">http://railsapps.github.io/installrubyonrails-mac.html</a></li>
+</ol>
+<p>If you have followed the above tutorials, you would have the following page ready:</p>
+<p><img class="aligncenter" src="{{ site.baseurl }}/assets/maxresdefault.jpg" alt="Rails Hello World" /></p>
+<h1>INTRODUCTION</h1>
+<p>Rails provides prewritten software functionality for creating web applications. It makes it easy to create common tools used in web development for database access, templating pages, authentication, etc. It was written using the Ruby programming language.</p>
+<p>Rails follows 3 principles:</p>
+<ol>
+<li>DRY - Don't Repeat Yourself - By avoiding duplication, your code will be easier to maintain.</li>
+<li>Convention Over Configuration - Rails provides default ways of doing everything. This minimizes the amount of code we have to write to just our customizations. The Rails defaults also follow the best practices for web application development.</li>
+<li>MVC
+<ol>
+<li><strong>Model</strong> - Data</li>
+<li><strong>View</strong> - What the user sees</li>
+<li><strong>Controller</strong> - Responds to user events and helps the view communicate with the model.</li>
+</ol>
+</li>
+</ol>
+<p>By doing things this way, each time you change the View you don't have to change the model and vice versa.</p>
+<p>[caption id="" align="aligncenter" width="800"]<img src="{{ site.baseurl }}/assets/MVC_1.png" alt="MVC architechture" width="800" height="600" /> How Requests are handled in Ruby on Rails[/caption]</p>
+<h1>Lets build something</h1>
+<p>Now that we have an fair outline about how requests are handled and fulfilled in a Rails application, let's use Rails to build a Twitter like application called Tooter.</p>
+<p>To start off, lets create a new Rails project using:</p>
+<pre><code>$ rails new tooter -d mysql
+</code></pre>
+<p>The <code>-d mysql</code> part of the command specifies that we would like to use MySQL for the database. This creates a bunch of files in the folder:</p>
+<pre><code>$ ls
+app  bin  config  config.ru  db  Gemfile  Gemfile.lock  lib  log  
+public  Rakefile  README.md  test  tmp  vendor
+</code></pre>
+<p>Lets talk about these files and folders:</p>
+<ol>
+<li><strong>app/</strong> is where most of the code for your app will go:<br />
+a. <strong>app/views/</strong> : The interface for your app<br />
+b. <strong>app/models/</strong> : The data for your app<br />
+c. <strong>app/controllers/</strong> : Handles communication between the Model and View so that they can act independently.</li>
+<li><strong>bin/</strong> Contains files used to run your app</li>
+<li><strong>config/</strong> Configures your Routes, database</li>
+<li><strong>config/routes.rb</strong> : Rails Router, when your app receives a URL, it calls the controller that provides the correct View</li>
+<li><strong>config/database.yml</strong> : Database configuration file. Contains information about how to connect to the database. (More on it, later on)</li>
+<li><strong>db/</strong> Contains the database schema, which defines the tables and general organization of the database</li>
+<li><strong>config.ru</strong> : Contains configuration rules for starting your app</li>
+<li><strong>Gemfile / Gemfile.lock</strong> : Defines the Gems used by your app</li>
+</ol>
+<p>Now, since we used MySQL for our app, we need to make a few tweaks to the <strong>config/database.yml</strong> file.</p>
+<p>Open up your database.yml file and add your MySQL root password in the <code>default -&gt; password</code> field. Also add a new field socket under default and set it to:</p>
+<ol>
+<li>/var/run/mysqld/mysqld.sock - for Ubuntu</li>
+<li>/var/mysql/mysql.sock - for OS X</li>
+</ol>
+<p>Now run this command to create a database for your app:</p>
+<p><code>$ bundle exec rake db:create </code></p>
+<p>Now we can start our server using:</p>
+<p><code>$ rails server </code></p>
+</div>

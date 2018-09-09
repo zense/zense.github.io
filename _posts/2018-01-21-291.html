@@ -1,0 +1,177 @@
+---
+layout: post
+title: Searching in Rails with Solr, Sunspot and Docker
+date: 2018-01-21 01:34:27.000000000 +05:30
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories: []
+tags: []
+meta:
+  _edit_last: '2'
+  rcp_user_level: None
+  _um_custom_access_settings: '0'
+  _um_accessible: '0'
+  _um_access_redirect2: ''
+  _um_access_roles: a:1:{i:0;s:1:"0";}
+  _um_access_redirect: ''
+author:
+  login: arkokoley
+  email: arkokoley@gmail.com
+  display_name: Gaurav Koley
+  first_name: Gaurav
+  last_name: Koley
+---
+<p><em>Cross posted from <a href="http://blog.koley.in/2018/searching-in-rails-with-solr-sunspot-and-docker">Blog.Koley.in</a></em></p>
+<p>Over the past few months, I have been working on a project titled <a href="http://goodwill.zense.co.in">Goodwill Currency</a> for the <a href="https://wsl.iiitb.ac.in">Web Science Lab @ IIIT-B</a>. It is a Ruby on Rails based portal with a VueJS frontend.</p>
+<p>One of the interesting challenges that I came across was search. Since most of the content on this portal will be hidden behind a login wall, we need a custom search solution. Enter Solr and Sunspot.</p>
+<p>Solr is a OpenSource Search platform based on Apache Lucene and has an excellent community around it. The documentation is excellent although running it in production can be a bit challenging.</p>
+<p>Sunspot is a ruby integration for solr and has excellent support for Rails. To integrate sunspot:</p>
+<p>Add to the Gemfile</p>
+<pre><code>gem 'sunspot_rails'
+</code></pre>
+<p>Install using <code>bundle install</code></p>
+<p>Generate configuration file:</p>
+<pre><code>rails g sunspot_rails:install
+</code></pre>
+<p>For the app, let’s assume we’ve got a Resource model (as is the case in my app), with title, description and tag_list fields. Also, we have an association <code>creators</code> which is a <code>has_many</code> which in turn has a "name" field.</p>
+<p>To set it up for keyword search, we use the searchable method:</p>
+<pre><code class="ruby">class Resource &lt; ApplicationRecord
+
+  has_many :creators
+
+  searchable do
+    text :title, :default_boost =&gt; 2
+    text :description
+    text :creators do     # for associations
+      creators.map { |creator| creator.name }
+    end
+    text :tag_list, :default_boost =&gt; 2
+    time :created_at
+  end
+
+end
+</code></pre>
+<p>The <code>text</code> here means that we’re creating a field that’s fulltext-searchable. It’ll be broken apart into individual keywords, and then those keywords will be matched against the words in keyword search queries.</p>
+<p>There are quite a few other field types, but text is the only one that is searched by keywords.</p>
+<p>That <code>default_boost</code> parameter means that, unless otherwise specified, words matching the <code>title</code> field should be considered twice as relevant as words matching the <code>description</code> field.</p>
+<p>Now that Sunspot knows how to index the Post model, we need to get the existing data into Solr.</p>
+<pre><code>rake sunspot:reindex
+</code></pre>
+<p>Apart from any change in the <code>searchable</code> definition, any time a Post is created, updated, or destroyed, Sunspot will automatically make the change to the index.</p>
+<p>Now lets add a new action to the controller which will handle our search queries.</p>
+<pre><code class="ruby">class ResourcesController &lt; ApplicationController
+
+  # GET /resources/search?q={query}
+  # GET /resources/search.json?q={query}
+  def search
+    @search = Resource.search(:include =&gt; [:creators]) do
+      keywords(params[:q])
+    end
+    @title = "Search results for "+params[:q]
+    @resources = @search.results
+    respond_to do |format|
+      format.html { render 'resources/index' }
+      format.json { render 'resources/search' }
+    end
+    end
+
+end
+</code></pre>
+<p>The above code utilises search form where a user types in some keywords, which submits a <code>:q</code> param to the <code>ResourcesController#search</code> action which then renders the results using the view for the <code>index</code> action.</p>
+<p>Thats it! We are done configuring Rails for Solr and Sunspot.</p>
+<p>Now, lets start our Solr server.</p>
+<p>Use <code>sunspot_solr</code> gem if you want to run Solr in development.</p>
+<p>Sunspot embeds Solr inside the gem so there's no need to install it separately. This means that everything works straight out of the box which makes it far more convenient to use in development.</p>
+<p>Add to Gemfile:</p>
+<pre><code>gem 'sunspot_rails'
+gem 'sunspot_solr'
+</code></pre>
+<p>Run Solr server:</p>
+<pre><code>bundle exec rake sunspot:solr:start
+</code></pre>
+<p>You can now access the solr server from browser:</p>
+<pre><code>http://localhost:8983/solr/#/
+</code></pre>
+<h2>Deploying Solr Search to production</h2>
+<p>I prefer to deploy all of my Rails apps on docker using <code>docker-compose</code>. So we will be using docker-compose to deploy Solr as well.</p>
+<pre><code class="yaml"># docker-compose.yml
+
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    dns: "8.8.8.8"
+    volumes:
+      - ".:/app"
+    env_file: .env
+    links:
+      - db:db
+      - solr:solr
+      # In production instead add external_links for db
+    command: bash -c "bin/rake assets:precompile && bin/rake db:create && bin/rake db:migrate && bin/rails s" 
+
+  # In production remove this and add an external link in web
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=somePassword
+    volumes:
+      - ./database:/var/lib/postgresql
+  solr:
+    image: solr:7.0.1
+    ports:
+      - "8983:8983"
+    volumes:
+      - data:/opt/solr/server/solr/mycores
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - mycore
+    links:
+      - db:db
+volumes:
+  data: {}
+
+</code></pre>
+<p>Go edit your <code>config/sunspot.yml</code> for the right settings for production mode.</p>
+<pre><code class="yaml">production:
+  solr:
+    hostname: solr # since our solr instance is linked as solr
+    port: 8983
+    log_level: WARNING
+    solr_home: solr
+    path: /solr/mycore 
+    # this path comes from the last command of our entrypoint as
+    # specified in the last parameter for our solr container
+</code></pre>
+<p>And that is all.</p>
+<h2>Common Initial Troubleshooting.</h2>
+<p>If you see:</p>
+<pre><code>Errno::ECONNREFUSED (Connection refused - connect(2))
+</code></pre>
+<p>Then perhaps:</p>
+<p>You have not started the solr server:</p>
+<pre><code>rake sunspot:solr:start
+</code></pre>
+<p>If you see</p>
+<pre><code>Solr::Error::Http (RSolr::Error::Http - 404 Not Found
+Error:     Not Found
+
+URI: http://localhost:8983/solr/development/select?wt=json
+</code></pre>
+<p>Create a new core using the admin interface at:</p>
+<pre><code>http://localhost:8983/solr/#/~cores
+</code></pre>
+<p>or by running the following command:</p>
+<pre><code>docker-compose exec solr solr create_core -c development
+</code></pre>
+<p>Resources:</p>
+<ol>
+<li><a href="https://gist.github.com/maxivak/e1211b67d33add72a4c4#run-solr-in-production">Run Solr in Production with Tomcat</a> </li>
+<li><a href="https://github.com/sunspot/sunspot">Sunspot docs</a></li>
+</ol>

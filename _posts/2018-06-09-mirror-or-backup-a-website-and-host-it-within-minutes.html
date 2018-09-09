@@ -1,0 +1,62 @@
+---
+layout: post
+title: Mirror or backup a website and host it within minutes
+date: 2018-06-09 21:57:12.000000000 +05:30
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories: []
+tags:
+- github
+- mirror website
+meta:
+  _edit_last: '15'
+  rcp_user_level: None
+  _um_custom_access_settings: '0'
+  _um_accessible: '0'
+  _um_access_redirect2: ''
+  _um_access_roles: a:1:{i:0;s:1:"0";}
+  _um_access_redirect: ''
+author:
+  login: satviksr
+  email: satviksr@gmail.com
+  display_name: Satvik Ramaprasad
+  first_name: Satvik
+  last_name: Ramaprasad
+---
+<p>Very often we need to take a backup of a website, i.e. download the website for offline use. There could be several reasons for this, one of-course is simply for backup purposes. Other reasons could be to view or modify the source code of a 3rd party website. It can also be used to take a "snapshot" of a dynamic website. Note any HTML content rendered using ajax may not get backed up.</p>
+<h1>Using wget to clone the website</h1>
+<pre><code>wget -mkEpnp &lt;URL of website to clone&gt;
+</code></pre>
+<p>Yep, Thats it! This command will clone all HTML, CSS, JS, Images and other content accessible from this page. Its recursive in nature so it will also clone content from all pages linked from this page. Wget is a free software package for retrieving files using HTTP, HTTPS, FTP and FTPS the most widely-used Internet protocols. There are several options possible, check them out using <code>wget -help</code>.</p>
+<h1>Host it locally, easily</h1>
+<p>If efficiency is required, you can install Nginx or Apache and use it to host the static content. However for most cases that is overkill and defeats the purpose.</p>
+<h2>Using Python SimpleHTTPServer to serve static content</h2>
+<p>Simply navigate to the directory</p>
+<pre><code>python -m SimpleHTTPServer &lt; port number &gt;
+</code></pre>
+<p>Now simply share your local IP address, for the clients to view the static content.</p>
+<h1>Hosting it globally for free, using github pages</h1>
+<p>To serve static content you can use Amazon AWS S3 Storage or setup a VM on DigitalOcean which will require configuring of nginx or apache. However this may take time and cost money and is therefore not desirable.</p>
+<h3>Push static website to github</h3>
+<ol>
+<li>Sign up on Github</li>
+<li><a href="https://gist.github.com/derhuerst/1b15ff4652a867391f03">Install git on your machine's command line</a></li>
+<li>Navigate to your cloned website's root folder (index.html should be there)</li>
+<li>Execute <code>git init</code>, to create your repository</li>
+<li>Execute <code>git add .</code> , to add all static content to staging area</li>
+<li>Execute <code>git commit -m "my static website"</code> to create a commit </li>
+<li>Create a new repo on github, make sure to <strong>uncheck</strong> "Initialize this repository with a README" </li>
+<li>Execute the instruction under "push an existing repository from the command line" in your github repo </li>
+</ol>
+<p>We are nearly done!</p>
+<h3>Publish static website as github pages</h3>
+<ol>
+<li>Navigate to settings page on github</li>
+<li>Scroll down to Github Pages</li>
+<li>Chose master branch and click save </li>
+</ol>
+<p>You should be able to see a URL now, congrats your website is live and global!</p>
+<p>If you have a custom domain, you can <a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/">link it to github pages</a></p>

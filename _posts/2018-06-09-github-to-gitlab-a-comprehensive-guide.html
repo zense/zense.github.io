@@ -1,0 +1,52 @@
+---
+layout: post
+title: 'GitHub to GitLab: A comprehensive guide'
+date: 2018-06-09 15:51:11.000000000 +05:30
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories: []
+tags:
+- github
+- gitlab
+meta:
+  _edit_last: '26'
+  rcp_user_level: None
+author:
+  login: Anirudh-C
+  email: anirudhvan@gmail.com
+  display_name: Anirudh C
+  first_name: Anirudh
+  last_name: C
+---
+<h4>"A bright future for GitHub" - Chris Wanstrath (@defunkt) (CEO &amp; Co-Founder, GitHub)</h4>
+<p>The community is divided on the repurcussions of Microsoft's acquisition of GitHub and GitLab is taking advantage of this to broaden their customer base. Here is a graph as of June 7th depicting the number of GitHub imports:</p>
+<p align="center">
+  <img src="{{ site.baseurl }}/assets/DfGuxyrVMAAejo-.jpg:small" width="500" height="500" align="center" /></p>
+<p>Going by those stats, you might want to at least try out GitLab (if you haven't already decided against it). But you want your precious issues, pull requests, wikis, labels, descriptions and so on to also be seamlessly moved to GitLab. This post aims to help you do exactly that.</p>
+<p>The primitive way of importing into GitLab would be to clone all your GitHub repositories to your local system, create empty repos on GitLab, add those repositories as a new remote and push it all there. But we don't want to do <strong>all</strong> that stuff. Thankfully, GitLab provides an easy way to do this using their GitHub Importer.</p>
+<h1>GitHub Token</h1>
+<p>You can use a GitHub personal access token to import your repositories into GitLab 1. Navigate to <a href="https://github.com/settings/tokens/new">GitHub generate tokens</a> 2. Enter the relevant details of your token 3. Choose the repository scope: these define the access for the token, see <a href="https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps">this</a> for more info 4. Now generate the token and copy the hash into the <a href="https://gitlab.com/import/github/new">GitHub Importer</a> 5. Now the GitHub Importer lists your repositories (based on your scope) and prompts you to import all or import individually. 6. You can also choose where in GitLab to import your repository into a specific namespace. For example, if you are importing the repositories of a GitHub organisation, you can create a group on GitLab and import the repositories under that namespace.</p>
+<h1>GitHub Integration</h1>
+<p>You can also use the existing integration between the two services to import your repositories. Ensure that any GitHub users you want to map to GitLab users have accounts that are linked or a public email address that matches. 1. Navigate to the <a href="https://gitlab.com/import/github/new">GitHub Importer</a> 2. Click on <strong>List your GitHub repositories</strong> which will redirect to GitHub to authenticate the GitLab's access to your repositories. 3. Again if you want your organisation to be imported, ensure that your org is checked in the GitHub authentication page. 4. Now go ahead with the steps to import as described above.</p>
+<p>GitLab will do a very good job with creating and using namespaces to import. For instance, the importer creates any new namespaces if they do not exist, or, if the namespace is taken, the repository is imported under the namespace of the user who initiated the import process. And you can configure almost everything about this.</p>
+<h3>Note:</h3>
+<p>GitHub and GitLab differ in some nomenclature and that can rise to confusion. For instance, a project in GitLab is a repository on GitHub. But GitHub has their own idea of projects which are sets of cards to highlight the work to be done in a repository.</p>
+<p>Owing to this fact some things cannot be imported into GitLab. The following aspects of a project are imported:</p>
+<ul>
+<li>Repository description (GitLab.com &amp; 7.7+)</li>
+<li>Git repository data (GitLab.com &amp; 7.7+)</li>
+<li>Issues (GitLab.com &amp; 7.7+)</li>
+<li>Pull requests (GitLab.com &amp; 8.4+)</li>
+<li>Wiki pages (GitLab.com &amp; 8.4+)</li>
+<li>Milestones (GitLab.com &amp; 8.7+)</li>
+<li>Labels (GitLab.com &amp; 8.7+)</li>
+<li>Release note descriptions (GitLab.com &amp; 8.12+)</li>
+<li>Pull request review comments (GitLab.com &amp; 10.2+)</li>
+<li>Regular issue and pull request comments</li>
+</ul>
+<p>The other aspects like stars, forks, organisation teams, etc cannot be imported. For a detailed description browse the developer docs of the <a href="https://docs.gitlab.com/ee/development/github_importer.html">Github Importer</a></p>
+<p>Happy importing!!</p>
+<p><em>Reposted from my personal <a href="http://anirudh-c.me/2018/06/09/github-to-gitlab">blog</a></em></p>
