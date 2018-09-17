@@ -1,34 +1,99 @@
 ---
 layout: default
 ---
+<section class="home columns">
 
-<div class="home">
-  {% if page.title %}
-    <h1 class="page-heading">{{ page.title }}</h1>
-  {% endif %}
+  <div class="column" style="background-image: url({{site.baseurl}}/assets/home2.jpg); background-size: cover;"></div>
 
-  {{ content }}
+  <div class="column hero is-fullheight">
+    <!-- Hero content: will be in the middle -->
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          <figure class="">
+            <img src="{{site.baseurl}}/assets/zense.png" alt="">
+          </figure>
+        </h1>
+        <h2 class="subtitle" style="border-top: 1px">
+          Software Developer's Group @ IIIT Bangalore
+        </h2>
+      </div>
+    </div>
+  
+    <!-- Hero footer: will stick at the bottom -->
+    <!-- <div class="hero-foot">
 
-  {% if site.posts.size > 0 %}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
-    <ul class="post-list">
-      {% for post in site.posts %}
-      <li>
-        {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        {% if site.show_excerpts %}
-          {{ post.excerpt }}
-        {% endif %}
-      </li>
-      {% endfor %}
-    </ul>
+    </div> -->
+  </div>
+</section>
 
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
-  {% endif %}
+<section class="hero is-dark is-bold is-medium">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        A community of developers run by the students of IIIT Bangalore.
+      </h1>
+      <h2 class="subtitle">
+        We work to build things and sometimes break them too. We organise events and promote open source culture at IIITB. We are tech enthusiasts and are looking to work with those of our kind.
+      </h2>
+    </div>
+  </div>
+</section>
 
-</div>
+<section class="home projects container">
+  <h1 class="title">Projects</h1>
+  <div class="tile is-ancestor">
+    <div class="tile is-vertical is-8">
+      <div class="tile">
+        <div class="tile is-parent is-vertical">
+          <article class="tile is-child notification is-primary">
+            <p class="title">Vertical...</p>
+            <p class="subtitle">Top tile</p>
+          </article>
+          <article class="tile is-child notification is-warning">
+            <p class="title">...tiles</p>
+            <p class="subtitle">Bottom tile</p>
+          </article>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-info">
+            <p class="title">{{ project.name }}</p>
+            <p class="subtitle">{{ project.excerpt }}</p>
+          </article>
+        </div>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-danger">
+          <p class="title">Wide tile</p>
+          <p class="subtitle">Aligned with the right tile</p>
+          <div class="content">
+            <!-- Content -->
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="tile is-parent">
+      <article class="tile is-child notification is-success">
+        <div class="content">
+          <p class="title">Tall tile</p>
+          <p class="subtitle">With even more content</p>
+          <div class="content">
+            <!-- Content -->
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% if site.posts.size > 0 %}
+<section class="home posts">
+  <div class="container">
+    <h1 class="title">Latest Posts</h1>
+  </div>
+  <br/>
+  {% for post in site.posts limit:4 %}
+    {% include post.html post=post %}        
+  {% endfor %}
+</section>
+{% endif %}

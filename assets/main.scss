@@ -2,4 +2,82 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-// @import "minima";
+.home.columns {
+  margin: 0 !important;
+
+  & .column {
+    padding: 0 !important;
+  }
+
+  & .column + .column {
+    max-width: 50vw;
+  }
+
+  @media screen and ( max-width: 770px){
+    & .column + .column {
+      max-width: initial;
+    }
+  }
+}
+
+section.home {
+  margin-top: 1em;
+}
+
+span.title {
+  font-size: 3rem;
+  line-height: 1.35;
+  display: inline;
+  box-decoration-break: clone;
+  background: #fff;
+  color: #111 !important;
+  padding: 0.5rem 1rem;
+  filter: url('#goo');
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+span.title + h4.subtitle {
+  margin-top: 2rem !important;
+}
+
+h1 {
+  font-family: Raleway;
+  font-size: 23 px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 23 px;
+}
+h3 {
+  font-family: Raleway;
+  font-size: 17 px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 23 px;
+}
+p {
+  font-family: Raleway;
+  font-size: 14 px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 23 px;
+}
+blockquote {
+  font-family: Raleway;
+  font-size: 17 px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 23 px;
+}
+pre {
+  font-family: Raleway;
+  font-size: 11 px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 23 px;
+}
