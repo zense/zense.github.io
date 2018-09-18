@@ -4,28 +4,27 @@ layout: default
 <section class="home split columns">
 
 
-  <div class="column hero is-fullheight is-white">
+  <div class="column hero is-fullheight is-light">
     <!-- Hero content: will be in the middle -->
-    <div class="hero-body" style="background: -moz-linear-gradient(left, rgba(171,171,171,1) 0%, rgba(219,219,219,1) 100%);">
+    <div class="hero-body"> <!--style="background: -moz-linear-gradient(left, rgba(171,171,171,1) 0%, rgba(219,219,219,1) 100%);"-->
       <div class="container" style="padding:1.5rem;">
         <img src="{{site.baseurl}}/assets/zense.png" alt="Zense Logo" style="width: 25vw;height:auto;">
         <!-- <h2 class="subtitle" style="border-top: 1px">
           Software Developer's Group @ IIIT Bangalore
         </h2> -->
-        <h2 class="subtitle is-2">A community of developers run by the students of IIIT Bangalore.</h2>
+        <h2 class="subtitle is-3">{{ site.description }}</h2>
 
-        <span class="icon" style="margin-right:1rem;">
+        <a href="https://github.com/{{ site.github_username }}">
+          <span class="icon" style="margin-right:1rem;">
             <i class="fab fa-github subtitle is-3"></i>
           </span>
+        </a>
+        <a href="https://facebook.com/{{ site.facebook_username }}">
           <span class="icon" style="margin-right:1rem;">
             <i class="fab fa-facebook subtitle is-3"></i>
           </span>
-          <span class="icon" style="margin-right:1rem;">
-            <i class="fab fa-twitter subtitle is-3"></i>
-          </span>
-          <span class="icon" style="margin-right:1rem;">
-            <i class="fab fa-instagram subtitle is-3"></i>
-          </span>
+        </a>
+
       </div>
     </div>
   
