@@ -1,11 +1,12 @@
 ---
 layout: default
+permalink: /blog/
 ---
 
 <section class="hero is-medium is-light is-bold">
     <div class="hero-body">
         <div class="container has-text-centered">
-            <span class="title" itemprop="name headline">Posts</span>
+            <span class="title" itemprop="name headline">Blog Posts</span>
         </div>
     </div>
 </section>

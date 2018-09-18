@@ -72,7 +72,7 @@ exclude:
 paginate:            5
 paginate_path:       "page:num"
 
-permalink:           /posts/:year/:title
+permalink:           /blog/:year/:title
 
 # Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this

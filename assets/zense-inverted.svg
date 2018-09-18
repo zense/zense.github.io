@@ -3,18 +3,18 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="200px" y="200px" viewBox="50 300 400 400" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:none;}
-	.st1{fill:none;stroke:#ffffff;stroke-width:15;stroke-miterlimit:10;}
-	.st2{fill:none;stroke:#ffffff;stroke-miterlimit:10;}
-	.st3{fill:none;stroke:#ffffff;stroke-width:0.25;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#010101;stroke-width:15;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#010101;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#010101;stroke-width:0.25;stroke-miterlimit:10;}
 	.st4{font-family:'Geomanist-Thin';}
 	.st5{font-size:90px;}
-	.st6{fill:none;stroke:#ffffff;stroke-width:22;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#010101;stroke-width:22;stroke-miterlimit:10;}
 </style>
 <g id="zense">
-<ellipse transform="matrix(0.708 -0.7062 0.7062 0.708 -192.3924 290.9984)" cx="255.7" cy="378.1" rx="12.5" ry="12.5" style="fill: #ffffff"/>
-<ellipse transform="matrix(0.708 -0.7062 0.7062 0.708 -242.3473 410.978)" cx="375.8" cy="498.5" rx="12.5" ry="12.5" style="fill: #ffffff"/>
-<ellipse transform="matrix(0.708 -0.7062 0.7062 0.708 -311.2419 241.5142)" cx="136.4" cy="497.1" rx="12.5" ry="12.5" style="fill: #ffffff"/>
-<ellipse transform="matrix(0.708 -0.7062 0.7062 0.708 -361.1967 361.4937)" cx="256.5" cy="617.5" rx="12.5" ry="12.5" style="fill: #ffffff"/>
+<ellipse transform="matrix(0.708 -0.7062 0.7062 0.708 -192.3924 290.9984)" cx="255.7" cy="378.1" rx="12.5" ry="12.5" style="fill: #010101"/>
+<ellipse transform="matrix(0.708 -0.7062 0.7062 0.708 -242.3473 410.978)" cx="375.8" cy="498.5" rx="12.5" ry="12.5" style="fill: #010101"/>
+<ellipse transform="matrix(0.708 -0.7062 0.7062 0.708 -311.2419 241.5142)" cx="136.4" cy="497.1" rx="12.5" ry="12.5" style="fill: #010101"/>
+<ellipse transform="matrix(0.708 -0.7062 0.7062 0.708 -361.1967 361.4937)" cx="256.5" cy="617.5" rx="12.5" ry="12.5" style="fill: #010101"/>
 <rect x="159.3" y="400.2" transform="matrix(0.708 -0.7062 0.7062 0.708 -276.7944 326.2458)" class="st0" width="193.5" height="195.2"/>
 <line class="st1" x1="136.4" y1="497.1" x2="255.7" y2="378.1"/>
 <line class="st1" x1="255.5" y1="617.5" x2="255.5" y2="378.1"/>

@@ -1,5 +1,8 @@
 <div class="backdrop"></div>
-{% assign i = 0 %}
+<a class="nav-button child" href="/" data-subitem="1"><span>Home</span></a>
+<a class="nav-button child" href="/blog" data-subitem="2"><span>Blog</span></a>
+
+{% assign i = 2 %}
 {% for my_page in site.pages %}
   {% if my_page.title %}
     {% assign i = i | plus:1 %}
