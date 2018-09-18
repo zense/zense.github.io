@@ -4,9 +4,8 @@ title: News
 permalink: /news/
 ---
 
-{% for item in site.news %}
-  <h2>{{ item.title }}</h2>
-  <p>{{ item.description }}</p>
-  <p><a href="{{ item.url }}">{{ item.title }}</a></p>
-{% endfor %}
-
+{% if site.news.size > 0 %}
+    {% for item in site.news %}
+      {% include post.html post=item %}
+    {% endfor %}
+{% endif %}
