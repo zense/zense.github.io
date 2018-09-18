@@ -1,0 +1,8 @@
+<a href="{{include.project.url}}" style="text-decoration:none !important;">
+<p class="title">{{ include.project.title }}</p>
+{% if include.long %}
+<p class="subtitle">{{ include.project.excerpt | strip_html | truncatewords:50 }}</p>
+{% else %}
+<p class="subtitle">{{ include.project.excerpt | strip_html | truncatewords:15 }}</p>
+{% endif %}
+</a>

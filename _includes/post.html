@@ -1,4 +1,4 @@
-{% assign colour_value = "danger, info, warning, primary, link, dark" | split: ', ' %}
+{% assign colour_value = "danger, info, warning, primary, link, dark, light" | split: ', ' %}
 {% assign random = colour_value | sample %}
 {% assign bold = " is-bold,  " | split: ', ' | sample %}
 {% assign colour_tag = "hero is-" | append: random | append: bold %}
