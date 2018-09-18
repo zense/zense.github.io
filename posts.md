@@ -2,14 +2,13 @@
 layout: default
 ---
 
-<section class="hero">
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <h1 class="title">Posts</h1>
+<section class="hero is-medium is-light is-bold">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <span class="title" itemprop="name headline">Posts</span>
+        </div>
     </div>
-  </div>
 </section>
-
 {% if site.posts.size > 0 %}
     {% for post in site.posts %}
       {% include post.html post=post %}

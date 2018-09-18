@@ -2,14 +2,19 @@
 layout: default
 ---
 
-<section class="hero">
+{% assign colour_value = "danger, info, warning, primary, link, dark, light" | split: ', ' %}
+{% assign random = colour_value | sample %}
+{% assign bold = " is-bold,  " | split: ', ' | sample %}
+{% assign colour_tag = "hero is-medium is-" | append: random | append: bold %}
+<section class="{{colour_tag}}">
     <div class="hero-body">
-      <div class="container has-text-centered">
-        <h1 class="title">{{ page.title | escape }}</h1>
-      </div>
+        <div class="container has-text-centered">
+          <span class="title" itemprop="name headline">{{ page.title | escape }}</span>
+        </div>
     </div>
-
 </section>
-<section class="container">
+<section class="section">
+  <div class="container">
     {{ content }}  
+  </div>
 </section>
