@@ -22,6 +22,36 @@
     </defs>
   </svg>
 
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+  $(function(){
+    $(".nav-button,.backdrop").click(function(){
+      if($(".backdrop").is(":visible")){
+        $(".backdrop").fadeOut(125);
+        $(".nav-button.child")
+          .stop()
+          .animate({
+            top	: $("#masterfab").css("top"),
+            opacity	: 0
+          },125,function(){
+            $(this).hide();
+          });
+      }else{
+        $(".backdrop").fadeIn(125);
+        $(".nav-button.child").each(function(){
+          $(this)
+            .stop()
+            .show()
+            .animate({
+              top	: (parseInt($("#masterfab").css("top")) + parseInt($("#masterfab").outerHeight()) + 70 * $(this).data("subitem") - $(".nav-button.child").outerHeight()) + "px",
+              opacity	: 1
+            },125);
+        });
+      }
+    });
+  });
+  </script>
+
   </body>
   
 
