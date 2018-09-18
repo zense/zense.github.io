@@ -11,10 +11,12 @@ permalink: /people/
   <div class="columns">
     {% for item in site.people limit:3 offset:offset %}
     <div class="column is-one-third has-text-centered person">
+      <div class="profile">
         {% avatar user=item.github size=200 %}
         <h2 class="title"><a href="{{ item.url }}">{{ item.name }}</a></h2>
         <p class="subtitle">{{ item.description }}</p>    
-    </div>
+      </div>
+      </div>
     {% endfor %}
   </div>
 {% endfor %}
