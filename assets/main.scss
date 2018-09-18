@@ -2,19 +2,16 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-.home.columns {
+.split.columns {
   margin: 0 !important;
 
   & .column {
     padding: 0 !important;
-  }
-
-  & .column + .column {
     max-width: 50vw;
   }
 
   @media screen and ( max-width: 770px){
-    & .column + .column {
+    & .column {
       max-width: initial;
     }
   }
@@ -22,6 +19,14 @@
 
 section.home {
   margin-top: 1em;
+}
+
+img.avatar {
+  border-radius: 50%;
+}
+
+p.subtitle a {
+  font-weight: bold;
 }
 
 span.title {

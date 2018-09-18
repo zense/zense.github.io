@@ -1,9 +1,52 @@
 ---
 layout: default
 ---
+<section class="split columns">
 
-<div class="page">
-  {% avatar {{ page.title }} %}
-  <h1 class="page-title">{{ page.name }}<small>  @{{ page.github }}    </small></h1> 
-  {{ page.description }}
-</div>
+  <div class="column hero is-dark is-fullheight" style="background-color: {{ page.basecolor }}; background-size: cover;">
+    <div class="hero-body">
+      <div class="container has-text-centered" style="max-width: 640px;">
+        {% avatar user=page.github size=300 %}
+        <h1 class="title">
+          {{ page.name }}
+        </h1>
+        <p class="subtitle">
+          {{ page.description }}
+        </p>
+        <!-- {% if page.dribbble  %}<a href="https://dribbble.com/{{ page.dribbble | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#dribbble' | relative_url }}"></use></svg></a>{% endif %}
+        {% if page.facebook  %}<a href="https://www.facebook.com/{{ page.facebook | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#facebook' | relative_url }}"></use></svg></a>{% endif %}
+        {% if page.flickr  %}<a href="https://www.flickr.com/photos/{{ page.flickr | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#flickr' | relative_url }}"></use></svg></a>{% endif %}
+        {% if page.github  %}<a href="https://github.com/{{ page.github | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use></svg></a>{% endif %}
+        {% if page.instagram  %}<a href="https://www.instagram.com/{{ page.instagram | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#instagram' | relative_url }}"></use></svg></a>{% endif %}
+        {% if page.linkedin  %}<a href="https://www.linkedin.com/in/{{ page.linkedin | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg></a>{% endif %}
+        {% if page.pinterest  %}<a href="https://www.pinterest.com/{{ page.pinterest | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#pinterest' | relative_url }}"></use></svg></a>{% endif %}
+        {% for mst in page.mastodon %}{% if mst.username and mst.instance %}<a href="https://{{ mst.instance| cgi_escape | escape}}/@{{mst.username}}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#mastodon' | relative_url }}"></use></svg></a>{% endif %}{% endfor %}
+        {% if page.twitter  %}<a href="https://twitter.com/{{ page.twitter | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#twitter' | relative_url }}"></use></svg></a>{% endif %}
+        {% if page.youtube  %}<a href="https://www.youtube.com/{{ page.youtube | cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#youtube' | relative_url }}"></use></svg></a>{% endif %}
+        {% if page.googleplus  %}<a href="https://plus.google.com/{{ page.googleplus | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#googleplus' | relative_url }}"></use></svg></a>{% endif %} -->
+      </div>
+    </div>
+    <!-- Hero footer: will stick at the bottom -->
+  </div>
+
+  <div class="column" style="max-height: 100vh; overflow: auto">
+    <!-- Hero content: will be in the middle -->
+    {% assign posts = site.posts | where:"authors", page.github  %}
+    {% if posts.size > 0 %}
+    <section class="home posts">
+      <div class="container is-fluid">
+        <h1 class="title">Latest Posts</h1>
+      </div>
+      <br/>
+      {% for post in posts %}
+        {% include post.html post=post %}        
+      {% endfor %}
+    </section>
+    {% endif %}
+  
+    <!-- Hero footer: will stick at the bottom -->
+    <!-- <div class="hero-foot">
+
+    </div> -->
+  </div>
+</section>
