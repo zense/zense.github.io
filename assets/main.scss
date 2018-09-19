@@ -119,6 +119,13 @@ body {
   line-height: 1;
   cursor: pointer;
   filter: url('#goo');
+
+  @media screen and ( max-width: 770px){
+    width: 64px;
+    height: 64px;
+    top: 24px;
+    left: 24px;
+  } 
 }
 .nav-button span {
   vertical-align: middle;
@@ -129,6 +136,11 @@ body {
   display: none;
   opacity: 0;
   font-size: 2em;
+  @media screen and ( max-width: 770px){
+    height: 32px;
+    width: 80px;
+    font-size: 1em;
+  } 
 }
 .backdrop {
   position: fixed;
