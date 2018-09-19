@@ -18,7 +18,17 @@
 }
 
 section.home {
-  margin-top: 1em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+
+  &:last-child {
+    padding-bottom: initial;
+  }
+
+  &:first-child {
+    padding-top: initial;
+    padding-bottom: initial;
+  }
 }
 
 img.avatar {

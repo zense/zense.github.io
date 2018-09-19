@@ -9,4 +9,8 @@
     <a class="nav-button child" href="{{ my_page.url | relative_url }}" data-subitem="{{ i }}"><span>{{ my_page.title | escape }}</span></a>
   {% endif %}
 {% endfor %}
+{% if page.url == "/" %}
+<div class="nav-button" id="masterfab" style="display: none"><img src="{{ site.baseurl }}/assets/zense-inverted.svg" alt=""></div>
+{% else %}
 <div class="nav-button" id="masterfab"><img src="{{ site.baseurl }}/assets/zense-inverted.svg" alt=""></div>
+{% endif %}

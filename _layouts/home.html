@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<section class="home split columns">
+<section class="home split columns" id="splash">
 
 
   <div class="column hero is-fullheight is-light">
@@ -49,51 +49,62 @@ layout: default
   </div>
 </section>
 
-<section class="home projects container hero is-bold">
-  <h1 class="title has-text-centered">Projects</h1>
-  {% assign projects= site.projects | limit: 5%}
-  <div class="tile is-ancestor">
-    <div class="tile is-vertical is-8">
-      <div class="tile">
-        <div class="tile is-parent is-vertical">
-          <article class="tile is-child notification is-primary">
-            {% assign project= projects[0] %}
-            {% include project_tile.html project=project %}
-          </article>
-          <article class="tile is-child notification is-warning">
-              {% assign project= projects[1] %}
+<section class="home projects hero is-light is-bold">
+  <div class="container">
+    <h1 class="title has-text-centered">Projects</h1>
+    {% assign projects= site.projects | limit: 5%}
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-8">
+        <div class="tile">
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification is-primary">
+              {% assign project= projects[0] %}
               {% include project_tile.html project=project %}
-              </article>
+            </article>
+            <article class="tile is-child notification is-warning">
+                {% assign project= projects[1] %}
+                {% include project_tile.html project=project %}
+                </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-info">
+                {% assign project= projects[2] %}
+                {% include project_tile.html project=project long=true %}
+            </article>
+          </div>
         </div>
         <div class="tile is-parent">
-          <article class="tile is-child notification is-info">
-              {% assign project= projects[2] %}
-              {% include project_tile.html project=project long=true %}
+          <article class="tile is-child notification is-danger">
+              {% assign project= projects[3] %}
+              {% include project_tile.html project=project %}
           </article>
         </div>
       </div>
       <div class="tile is-parent">
-        <article class="tile is-child notification is-danger">
-            {% assign project= projects[3] %}
-            {% include project_tile.html project=project %}
+        <article class="tile is-child notification is-success">
+            {% assign project= projects[4] %}
+            {% include project_tile.html project=project long=true %}
         </article>
       </div>
-    </div>
-    <div class="tile is-parent">
-      <article class="tile is-child notification is-success">
-          {% assign project= projects[4] %}
-          {% include project_tile.html project=project long=true %}
-      </article>
     </div>
   </div>
 </section>
 
 {% if site.posts.size > 0 %}
-<section class="home posts" style="padding-top: 20px">
-  <div class="container">
-    <h1 class="title has-text-centered">Latest Posts</h1>
-  </div>
-  <br/>
+<section class="home posts">
+
+  <section class="hero">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">
+              Latest Posts
+          </h1>
+          <h2 class="subtitle">
+              &nbsp;
+          </h2>
+        </div>
+      </div>
+    </section>
   {% for post in site.posts limit:4 %}
     {% include post.html post=post %}        
   {% endfor %}

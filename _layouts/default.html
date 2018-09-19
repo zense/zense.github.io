@@ -50,6 +50,18 @@
       }
     });
   });
+
+  window.addEventListener("scroll",function(){
+    var target = document.getElementById('masterfab');
+    var $el = $('#splash');  //record the elem so you don't crawl the DOM everytime  
+    var bottom = $el.position().top + $el.outerHeight(true); // passing "true" will also include the top and bottom margin
+    if(window.pageYOffset > bottom){
+      $(target).fadeIn(300);
+    }
+    else if(window.pageYOffset < bottom){
+      $(target).fadeOut(300);
+    }
+  },false);
   </script>
 
   </body>
