@@ -1,4 +1,6 @@
-Name: Shreyas Gupta
-Github: GLaDOS-root
-Description: UI & UX engineer | ML enthusiast
-basecolor: 5b3277
+---
+name: Shreyas Gupta
+github: GLaDOS-root
+description: UI & UX engineer | ML enthusiast
+basecolor: #5b3277
+---
