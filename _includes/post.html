@@ -2,10 +2,10 @@
 {% assign random = colour_value | sample %}
 {% assign bold = " is-bold,  " | split: ', ' | sample %}
 {% assign colour_tag = "hero is-" | append: random | append: bold %}
-<section class="{{ colour_tag }}">
+<section class="{{ }}">
   <div class="hero-body">
     {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-    <div class="container is-fluid">
+    <div class="container">
       <a href="{{ include.post.url | relative_url }}">
         <h1 class="title">
             {{ include.post.title | escape }}
