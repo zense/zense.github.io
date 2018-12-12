@@ -1,4 +1,10 @@
-## My experience at GHCI 2018!
+---
+title: My experience at GHCI 2018
+date: 2018-12-10 14:18 +0530
+categories: ghci
+authors: 
+  - aSquare14
+---
 
 GHC or Grace Hopper Celebration of Women in Computing is the world's largest gathering of women technologists. It is held in the USA and India every year.
 
