@@ -2,6 +2,6 @@
 name: Nithin Raj
 github: nithinr07
 description: >
-  Member at @zense | Rails developer, Web development enthusiast
+  Core Member at @zense | Rails Developer, Software Enthusiast
 basecolor: "#E80000"
 ---
